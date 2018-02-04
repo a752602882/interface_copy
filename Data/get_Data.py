@@ -39,7 +39,7 @@ class GetData:
             return None
 
      #获取url
-    def get_url(self,row):
+    def get_request_url(self,row):
         col = data_config.get_url()
         url = self.oper_execl.get_cell_value(row,col)
         return url
