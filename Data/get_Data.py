@@ -30,7 +30,7 @@ class GetData:
         return  request_way
 
     #是否携带header
-    def is_header(self,row):
+    def is_header(self, row):
         col = data_config.get_header_value()
         header = self.oper_execl.get_cell_value(row,col)
         if header != '':
@@ -74,14 +74,16 @@ class GetData:
             return  depend_case_id
 
 
-    #获取数据依赖字段
-    def get_depend_field(self,row):
+    #判断是否存在case依赖
+    def is_depend(self,row):
         col = int(data_config.get_field_depend())
         data = self.oper_execl.get_cell_value(row,col)
         if data =='':
             return  None
         else:
             return data
+
+
 
     def write_result(self,row,value):
         col = data_config.get_result()

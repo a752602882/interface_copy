@@ -35,3 +35,5 @@ class DeppenddentData:
        json_exe = parse(deppend_data)
        madle = json_exe.find(response_data)
        return [math.value for math in madle][0]
+
+
