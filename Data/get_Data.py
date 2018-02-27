@@ -1,4 +1,4 @@
-#coding=utf-8
+#coding:utf-8
 from Unit.OperationExecl import OperationExecl
 from Unit.OperationJson import OperationJson
 from Data import data_config
@@ -55,7 +55,7 @@ class GetData:
     #通过获取关键字拿到data数据
     def get_data_for_json(self,row):
         oper_json =OperationJson()
-        request_json = oper_json.get_data(row)
+        request_json = oper_json.get_data(self.get_request_data(row))
         return  request_json
 
     #获取预期结果
@@ -64,8 +64,8 @@ class GetData:
         expect = self.oper_execl.get_cell_value(row,col)
         return expect
 
-    #获取依赖数据的key
-    def get_depend_filed(self,row):
+    #获取依赖数据的caseid
+    def get_case_depend(self,row):
         col = int(data_config.get_case_depend())
         depend_case_id = self.oper_execl.get_cell_value(row,col)
         if depend_case_id =='':
@@ -73,13 +73,21 @@ class GetData:
         else:
             return  depend_case_id
 
+    #本case中依赖其他case返回的数据
+    def get_response_data_depend(self,row):
+        col = int(data_config.get_response_data_depend())
+        depend_key = self.oper_execl.get_cell_value(row,col)
+        if depend_key =="":
+            return None
+        else:
+            return depend_key
 
-    #判断是否存在case依赖
+    #判断本case中的字段名是否存在
     def is_depend(self,row):
         col = int(data_config.get_field_depend())
         data = self.oper_execl.get_cell_value(row,col)
         if data =='':
-            return  None
+            return None
         else:
             return data
 
@@ -89,11 +97,3 @@ class GetData:
         col = data_config.get_result()
         self.oper_execl.write_value(row,col,value)
 
-        #获取依赖数据的key
-    def get_depend_key(self,row):
-        col = data_config.get_case_depend()
-        depend_key = self.oper_execl.get_cell_value(row,col)
-        if depend_key == ' ':
-            return None
-        else:
-            return depend_key

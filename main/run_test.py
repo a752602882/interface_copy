@@ -1,4 +1,4 @@
-#coding=utf-8
+#coding:utf-8
 from Base.run_method import RunMethod
 from Data.get_Data import GetData
 from Unit.common_unit import CommonUnit
@@ -17,21 +17,24 @@ class RunTest:
         res =None
         rows_count = self.data.get_case_line();
         for i in range(1,rows_count):
-            print i
             is_run = self.data.get_is_run(i)
-            method = self.data.get_request_way(i)
-            url =self.data.get_url(i)
-            request_data = self.data.get_request_data(i)
-            header = self.data.is_header(i)
-            exepct = self.data.get_expect_data(i)
-            depend_case =self.data.is_depend(i)
-            if depend_case!=None:
-                self.depend_data = DeppenddentData()
-                depend_response_data=self.depend_data.get_data_for_key(i)
-                depend_key  = self.data.get_depend_filed(i)
-                request_data[depend_key] = depend_response_data
+            if is_run:
+                print i
+                url =self.data.get_request_url(i)
+                method = self.data.get_request_way(i)
+                request_data = self.data.get_request_data(i)
+                exepct = self.data.get_expect_data(i)
+                header = self.data.is_header(i)
+                depend_case =self.data.is_depend(i)
+                if depend_case!=None:
+                    depend_id = self.data.get_case_depend(i)
+                    #获取的依赖响应数据
+                    self.depend_data = DeppenddentData(depend_id)
+                    depend_response_data=self.depend_data.get_data_for_key(i)
+                    depend_key  = self.data.get_depend_filed(i)
+                    request_data[depend_key] = depend_response_data
 
-            res = self.run_method.run_main(method,url,request_data,header)
+                res = self.run_method.run_main(method,url,request_data,header)
 
             if is_run ==True:
 

@@ -1,4 +1,4 @@
-#coding=utf-8
+#coding:utf-8
 import json
 
 
@@ -9,7 +9,7 @@ class OperationJson:
 
     #读取json文件
     def read_json(self):
-        with open("../dataConfig/data.json") as fp:
+        with open("../dataConfig/user.json") as fp:
              data =json.load(fp)
         return data
 

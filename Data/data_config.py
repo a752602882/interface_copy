@@ -8,7 +8,7 @@ class global_var:
     request_way = 4
     header = 5
     case_depend = 6
-    data_depend = 7
+    response_data_depend = 7
     field_depend = 8
     data = 9
     expect = 10
@@ -33,8 +33,8 @@ def get_header():
 def get_case_depend():
     return global_var.case_depend
 
-def get_data_depend():
-    return global_var.data_depend
+def get_response_data_depend():
+    return global_var.response_data_depend
 
 def get_field_depend():
     return global_var.field_depend

@@ -1,4 +1,4 @@
-#coding=utf-8
+#coding:utf-8
 import xlrd
 from xlutils.copy import copy
 
@@ -28,13 +28,13 @@ class OperationExecl:
 
      #读取一行的内容
      def get_cell_value(self,row,col):
-         self.data.cell_value(row,col)
+         return self.data.cell_value(row,col)
 
      #为某一单元行写入内容
      def write_value(self,row,col,value):
-         read_data = xlrd.open_workbook(self.file)
+         read_data = xlrd.open_workbook(self.file_name)
          write_data = copy(read_data)
-         sheet_data = write_data.get_sheets(0)
+         sheet_data = write_data.get_sheet(0)
          sheet_data.write(row,col,value)
          write_data.save(self.file_name)
 
@@ -50,7 +50,7 @@ class OperationExecl:
          for col_data in cols_data:
              if case_id in col_data:
                  return num
-             num+1
+             num =num+1
 
 
      #获取某一列的所有类容
